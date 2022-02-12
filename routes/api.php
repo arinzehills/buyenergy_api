@@ -6,6 +6,7 @@ use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\ValidationException;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\ApiController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,6 +23,11 @@ Route::post('/login', [UserController::class, 'login']);
 Route::get('/user',[UserController::class, 'getCurrentUser']);
 Route::post('/update', [UserController::class, 'update']);
 Route::get('/logout', [UserController::class, 'logout']);
+Route::get('/getBalance', [ApiController::class, 'getBalance']);
+Route::post('/verifyCustomer', [ApiController::class, 'verifyCustomer']);
+Route::post('/buyElectricity', [ApiController::class, 'buyElectricity']);
+Route::post('/buyAirtime', [ApiController::class, 'buyAirtime']);
+Route::post('/requeryTransactions', [ApiController::class, 'requeryTransactions']);
 // Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 //     return $request->user();
 // });

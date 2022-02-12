@@ -1,0 +1,155 @@
+<?php
+
+namespace App\Http\Controllers;
+use Illuminate\Support\Facades\Http;
+use Illuminate\Http\Request;
+
+class ApiController extends Controller
+{
+    // public static $url='https://mobilenig.com/API/';
+    public static $apikey='a4f727322a9adf12c344279b71f662ea';
+    public static $url='https://mobilenig.com/API/';
+    // public  function getBalance(){
+    //     $response = Http::get(static::$url.'balance', [
+    //         'username' => 'arinzehills',
+    //         'api_key' => static::$apikey,
+    //     ]);
+    //     return $response->body();
+    // }
+    // public  function verifyCustomer(Request $request){
+    //     $service=$request->service;
+    //     $number=$request->number;
+
+    //     //meter-no-04177195122
+        
+    //     $response = Http::get(static::$url.'bills/user_check', [            
+    //         'username' => 'arinzehills',
+    //         'api_key' => static::$apikey,
+    //         'service' => $service,//prepaid or post paid //or company prepaid
+    //         'number' => $number,//prepaid or post paid //or company prepaid
+    //     ]);
+    //     return $response->body();
+    // }
+
+    // public  function buyElectricity(Request $request){
+    //                 $meter_number=$request->meter_number;
+    //                 $service_id=$request->service_id;
+    //                 $variation_id=$request->variation_id;
+    //                 $phone=$request->phone;
+    //                 $amount=$request->amount;
+    
+                    
+    //                 $response = Http::get(static::$url.'electricity', [
+    //                     'username' => 'arinzehills',
+    //                     'password' => 'H12LAR1..',
+    //                     'meter_number' => $meter_number,//meter no
+    //                     'service_id' => $service_id,//company to pay to
+    //                     'variation_id' => $variation_id,//prepaid or post paid
+    //                     'amount' => $amount,
+    //                     'phone' => $phone,//phone no
+    
+    //                 ]);
+    //                 return $response->body();
+    //             }
+        // public function Ikeja(Request $request){
+        //     $customer_id=$request->customer_id;
+        //     $service_id=$request->service_id;
+        //     $variation_id=$request->variation_id;
+
+        //     'username' => 'arinzehills',
+        //     'api_key' => static::$apikey,
+        // }
+   
+   
+        
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+    //
+    // public static $url='https://vtu.ng/wp-json/api/v1/';
+    // public function __construct(string $url)
+    // {
+    //     $this->url = $url;
+    // }
+
+
+
+    public  function getBalance(){
+        $response = Http::get(static::$url.'balance', [
+            'username' => 'arinzehills',
+            'password' => 'H12LAR1..',
+        ]);
+        return $response->body();
+    }
+
+            public  function verifyCustomer(Request $request){
+                $customer_id=$request->customer_id;
+                $service_id=$request->service_id;
+                $variation_id=$request->variation_id;
+
+                //meter-no-04177195122
+                
+                $response = Http::get(static::$url.'verify-customer', [
+                    'username' => 'arinzehills',
+                    'password' => 'H12LAR1..',
+                    'customer_id' => $customer_id,//meter no
+                    'service_id' => $service_id,//company to pay to
+                    'variation_id' => $variation_id,//prepaid or post paid
+                ]);
+                return $response->body();
+            }
+            public  function buyElectricity(Request $request){
+                $meter_number=$request->meter_number;
+                $service_id=$request->service_id;
+                $variation_id=$request->variation_id;
+                $phone=$request->phone;
+                $amount=$request->amount;
+
+                
+                $response = Http::get(static::$url.'electricity', [
+                    'username' => 'arinzehills',
+                    'password' => 'H12LAR1..',
+                    'meter_number' => $meter_number,//meter no
+                    'service_id' => $service_id,//company to pay to
+                    'variation_id' => $variation_id,//prepaid or post paid
+                    'amount' => $amount,
+                    'phone' => $phone,//phone no
+
+                ]);
+                return $response->body();
+            }
+    //         public  function buyAirtime(Request $request){
+    //             $phone=$request->phone;
+    //             $network_id=$request->network_id;
+    //             $amount=$request->amount;
+    //             $response = Http::get(static::$url.'airtime', [
+    //                 'username' => 'arinzehills',
+    //                 'password' => 'H12LAR1..',
+    //                 'phone' => $phone,//phone no
+    //                 'network_id' => $network_id,//company to pay to//eg MTN
+    //                 'amount' => $amount,
+    //             ]);
+    //             return $response->body();
+    //         }
+    //         public  function buyData(){
+    //             $phone=$request->phone;
+    //             $network_id=$request->network_id;
+    //             $variation_id=$request->variation_id;
+
+    //             $response = Http::get(static::$url.'balance', [
+    //                 'username' => 'arinzehills',
+    //                 'password' => 'H12LAR1..',
+    //                 'phone' => $phone,//phone no
+    //                 'network_id' => $network_id,//company to pay to//eg MTN
+    //                 'variation_id' => $variation_id,//data plan type
+    //             ]);
+    //             return $response->body();
+    //         }
+}
