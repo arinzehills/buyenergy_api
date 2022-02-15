@@ -13,7 +13,7 @@ class ApiController extends Controller
     // public static $url='https://mobilenig.com/API/';
 
     public static $apikey='a4f727322a9adf12c344279b71f662ea';
-    public static $live_url='https://sandbox.vtpass.com/api/';
+    // public static $live_url='https://sandbox.vtpass.com/api/';
     public static $sanboxurl='https://sandbox.vtpass.com/api/';
     public static $email='arinzehill@gmail.com';
     public static $password='Arinze12.';
@@ -156,6 +156,7 @@ class ApiController extends Controller
         }
         public  function buyAirtime(Request $request){
             $serviceID=$request->serviceID;
+            $user_id=$request->user_id;
             $phone=$request->phone;
             $amount=$request->amount;
             $date = Carbon::now();// will get you the current date, time 
@@ -180,7 +181,7 @@ class ApiController extends Controller
                     $product_name=$json['content']['transactions']['product_name'] ?? '';
 
                     $inputs=Transactions::create( $request->all()+
-                                    ['order_id'=>$requestId,
+                                    ['order_id'=>$requestId,'user_id'=>$user_id,
                                     'transaction_type'=>'airtime',
                                     'product_name'=>$product_name,
                                 ]);
