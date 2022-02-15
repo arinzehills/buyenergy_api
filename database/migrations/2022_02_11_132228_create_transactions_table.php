@@ -18,7 +18,9 @@ class CreateTransactionsTable extends Migration
             $table->unsignedInteger('user_id')->nullable();
             $table->foreign('user_id')->references('id')
                     ->on('users');
-            $table->string('order_id')->nullable();;//should be your request_id at vvtpass.com
+            $table->string('order_id')->nullable();//should be your request_id at vvtpass.com
+            $table->string('product_name')->nullable();//should be your request_id at vvtpass.com
+            $table->string('transaction_type')->nullable();//should be your request_id at vvtpass.com
             $table->string('purchased_token')->nullable();
             $table->string('phone')->nullable();
             $table->string('units')->nullable();

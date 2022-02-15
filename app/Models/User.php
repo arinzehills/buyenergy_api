@@ -66,4 +66,9 @@ class User extends Authenticatable implements JWTSubject
         $user = JWTAuth::parseToken()->authenticate();
         return $user;
      }
+     public function transactions()
+        {
+            //return $this->hasMany(Order::class);
+            return $this->hasMany('App\Model\Transactions');
+        }
 }

@@ -65,12 +65,11 @@ class ApiController extends Controller
             $serviceID=$request->serviceID;
             $variation_code=$request->variation_code;
             $billersCode=$request->billersCode;
-            $type=$request->type;
+            // $type=$request->type;
             $phone=$request->phone;
             $amount=$request->amount;
             $date = Carbon::now();// will get you the current date, time 
             $request_id=$date->format("Ymd");
-            echo($request_id .Str::random(8));
             
             $response = Http::withBasicAuth(static::$email,static::$password)
                         ->post(static::$sanboxurl.'pay', [
@@ -111,8 +110,15 @@ class ApiController extends Controller
                     $bonus=$json['bonusToken'] ?? '';
                     $purchase_code=$json['purchased_code'];
                     $requestId=$json['requestId'];
+                    $product_name=$json['content']['transactions']['product_name'];
                     
-                    Transactions::create($request->all()+['order_id'=>$requestId]);
+                    Transactions::create($request->all()+
+                                        ['order_id'=>$requestId,
+                                        'units'=>$units,'purchased_token'=>$purchase_code,
+                                        'transaction_type'=>'electricity',
+                                        'product_name'=>$product_name,
+                                        ]
+                                       );
                         return response()->json([
                             'success'=>true,     
                             'units'=> $units,
@@ -164,13 +170,20 @@ class ApiController extends Controller
                     ]);
                     $res=$response->body();
                     $json=json_decode($res,true);
+                    
+                    // return $json;
                     $status=$json['response_description'];
             if($status=='TRANSACTION SUCCESSFUL'){             
                     $requestId=$json['requestId'];
                     $phone=$json['content']['transactions']
                     ['unique_element'] ?? '';
-                   
-                    $inputs=Transactions::create( $request->all()+['order_id'=>$requestId]);
+                    $product_name=$json['content']['transactions']['product_name'] ?? '';
+
+                    $inputs=Transactions::create( $request->all()+
+                                    ['order_id'=>$requestId,
+                                    'transaction_type'=>'airtime',
+                                    'product_name'=>$product_name,
+                                ]);
                     return response()->json([
                         'success'=>true,     
                         'phone'=> $phone,
@@ -191,7 +204,6 @@ class ApiController extends Controller
                                 'error'=> $json['content']['errors'][0] ?? 'check ur inputs',
                             ], 504);
                         }
-                    return $json;
 
         }
         
