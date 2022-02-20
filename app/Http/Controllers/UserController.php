@@ -159,7 +159,7 @@ class UserController extends Controller {
         
             return $status === Password::RESET_LINK_SENT
                     ? response()->json(['status' => $status])
-                    : response()->json(['email' => $status]);
+                    : response()->json(['status' => $status]);
 
          }
 
