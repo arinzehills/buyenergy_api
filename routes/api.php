@@ -24,6 +24,9 @@ Route::post('/login', [UserController::class, 'login']);
 Route::get('/user',[UserController::class, 'getCurrentUser']);
 Route::post('/update', [UserController::class, 'update']);
 Route::get('/logout', [UserController::class, 'logout']);
+Route::post('/forgotPassword', [UserController::class, 'forgotPassword']);
+Route::post('/resetPassword', [UserController::class, 'resetPassword'])->
+                                            name('password.reset');
 Route::get('/getBalance', [ApiController::class, 'getBalance']);
 Route::post('/verifyCustomer', [ApiController::class, 'verifyCustomer']);
 Route::post('/buyElectricity', [ApiController::class, 'buyElectricity']);

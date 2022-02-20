@@ -7,9 +7,14 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Contracts\Auth\CanResetPassword;
 use JWTAuth;
 use Tymon\JWTAuth\Contracts\JWTSubject;
-class User extends Authenticatable implements JWTSubject
+use App\Notifications\CustomResetNotification;
+
+
+
+class User extends Authenticatable implements JWTSubject,CanResetPassword  
 {
     use HasApiTokens, HasFactory, Notifiable;
 
@@ -71,4 +76,16 @@ class User extends Authenticatable implements JWTSubject
             //return $this->hasMany(Order::class);
             return $this->hasMany('App\Model\Transactions');
         }
+
+        
+    /**
+     * Send the password reset notification.
+     *
+     * @param  string  $token
+     * @return void
+     */
+    public function sendPasswordResetNotification($token)
+    {
+        $this->notify(new CustomResetNotification($token));
+    }
 }
