@@ -53,7 +53,7 @@ class TransactionController extends Controller
                 $totalTransactions=Transactions::where('user_id',$id)->count();
                 $unitList=$this->getUserUnitsList($transactions);//return the list of units used
                 $amountList=$this->getUserAmountsList($transactions);//return the list of amount
-                // $TransactionList=//return the transaction list
+                // $TransactionOnElectricity=//return the transaction list
                 $json = response()->json([
                     'total_amount'=>$totalAmount,     
                     'total_units'=> $totalUnits,

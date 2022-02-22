@@ -8,6 +8,7 @@ use Illuminate\Validation\ValidationException;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\ApiController;
+use Laravel\Sanctum\Http\Controllers\CsrfCookieController;
 
 /*
 |--------------------------------------------------------------------------
@@ -56,8 +57,9 @@ Route::post('/sanctum/token', function (Request $request) {
 
     return $user->createToken($request->device_name)->plainTextToken;
 });
-// Route::group(['middleware' => ['web']], function () {
-//     // your routes here
+// Route::get('/sanctum/csrf-cookie ', [CsrfCookieController::class, 'show']); 
+Route::group(['middleware' => ['web']], function () {    // your routes here
     
-// // Route::get('/sanctum/csrf-cookie ', [CsrfCookieController::class, 'show']); 
-// });
+ Route::get('/sanctum/csrf-cookie ', [CsrfCookieController::class, 'show']); 
+
+});
