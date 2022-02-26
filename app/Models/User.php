@@ -84,8 +84,10 @@ class User extends Authenticatable implements JWTSubject,CanResetPassword
      * @param  string  $token
      * @return void
      */
-    public function sendPasswordResetNotification($token)
-    {
-        $this->notify(new CustomResetNotification($token));
-    }
+    // public function sendPasswordResetNotification($token)
+    // {
+    //     $url='http://localhost:3000/resetPassword?token='.$token;
+
+    //     $this->notify(new CustomResetNotification($url));
+    // }
 }

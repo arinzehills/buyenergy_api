@@ -26,9 +26,13 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
-        //
-        // ResetPassword::createUrlUsing(function ($user, string $token) {
-        //     return 'https://example.com/reset-password?token='.$token;
-        // });
+        
+        ResetPassword::createUrlUsing(function ($user, string $token) {
+            //   $url='http://localhost:3000/resetPassword?token='.$token;
+              $url='https://buyenergy.netlify.app/resetPassword?token='.$token;
+
+            // return 'https://example.com/reset-password?token='.$token;
+            return $url;
+        });
     }
 }
